@@ -30,12 +30,12 @@ var ModifyRouter = require('./routers/ModifyRouters.js')
 
 
 // // React 빌드 파일 제공 코드 주석 처리 (빌드 안 했으므로 필요 없음)
-// app.use(express.static(path.join(__dirname, 'finalcap2', 'build')));
+app.use(express.static(path.join(__dirname, 'finalcap2', 'build')));
 
-// // React의 모든 경로를 index.html로 연결 코드 주석 처리
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'finalcap2', 'build', 'index.html'));
-// });
+// React의 모든 경로를 index.html로 연결 코드 주석 처리
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'finalcap2', 'build', 'index.html'));
+});
 
 // API 라우터 설정
 app.use('/api', loginRouter);
