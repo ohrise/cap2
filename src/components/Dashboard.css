@@ -40,7 +40,7 @@
 
 /* 히어로 섹션 스타일 */
 .hero-section {
-    background-image: url('/Users/oseli/Desktop/캡스톤 2/코드/finalcap2/src/components/sunny.jpeg'); /* 이미지 URL 대체 */
+    background-image: url('./sunny.jpeg'); /* 이미지 URL 대체 */
     background-size: cover;
     background-position: center;
     height: 400px;
