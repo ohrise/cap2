@@ -3,7 +3,7 @@ const xlsx = require('xlsx');
 const pool = require('../pgConnect.js'); // PostgreSQL 연결
 
 // 엑셀 파일 경로
-const excelFilePath = './지역정보_최종.xlsx';
+const excelFilePath = './location.xlsx';
 
 const workbook = xlsx.readFile(excelFilePath);
 const sheet = workbook.Sheets[workbook.SheetNames[0]];
