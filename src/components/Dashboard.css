@@ -40,7 +40,8 @@
 
 /* 히어로 섹션 스타일 */
 .hero-section {
-		background-image: url('./sunny.jpeg');
+	background-image: url('../components/sunny.jpeg');
+
     background-size: cover;
     background-position: center;
     height: 400px;
