@@ -29,13 +29,12 @@ var ReportRouter = require('./routers/ReportRouters.js'); // 상대 경로
 var ModifyRouter = require('./routers/ModifyRouters.js')
 
 
-// 정적 파일 제공 경로를 수정
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "finalcap2/build")));
 
-// 모든 요청을 React의 index.html로 리다이렉트
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "index.html"));
+  res.sendFile(path.join(__dirname, "finalcap2/build", "index.html"));
 });
+
 
 
 // API 라우터 설정
