@@ -30,57 +30,66 @@ async function getLocationCoordinates(city, district) {
 
 // 날씨 정보 가져오기
 async function getWeatherInfo(city, district, dateInput, timeInput) {
-	const coordinates = await getLocationCoordinates(city, district);
-	if (!coordinates) {
-			throw new Error('해당 위치의 좌표를 찾을 수 없습니다.');
-	}
+  const coordinates = await getLocationCoordinates(city, district); // `await` 추가로 비동기 함수 처리
+  if (!coordinates) {
+    throw new Error('해당 위치의 좌표를 찾을 수 없습니다.');
+  }
 
-	const { nx, ny } = coordinates;
-	console.log('좌표:', { nx, ny });
-	console.log('날씨 요청:', { dateInput, timeInput });
+  const { nx, ny } = coordinates;
+  console.log('날씨 정보 요청:', { nx, ny, dateInput, timeInput });
 
-	const apiUrl = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst';
-	const serviceKey = 'DSQRNtEytEgIHvSIiIc0BVZP6fHjNZvzWzJO7dZqPVURPfN0TLjYV89A6Ht4+Iv905FtGseBc/5Ji7sYOEcXcw==';
+  const apiUrl = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst'; 
+  const serviceKey = 'DSQRNtEytEgIHvSIiIc0BVZP6fHjNZvzWzJO7dZqPVURPfN0TLjYV89A6Ht4+Iv905FtGseBc/5Ji7sYOEcXcw==';
 
-	const queryParams = `?serviceKey=${encodeURIComponent(serviceKey)}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${dateInput}&base_time=${timeInput}&nx=${nx}&ny=${ny}`;
-	
+  // API 요청 쿼리 파라미터 설정
+  const queryParams = `?serviceKey=${encodeURIComponent(serviceKey)}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${dateInput}&base_time=${timeInput}&nx=${nx}&ny=${ny}`;
+
 	try {
-			console.log('API 요청 URL:', apiUrl + queryParams);
-			const response = await axios.get(apiUrl + queryParams);
-			
-			// 응답 데이터 확인
-			console.log('API 응답:', response.data);
+    const response = await axios.get(apiUrl + queryParams);
+    const items = response.data.response.body.items.item;
 
-			const items = response?.data?.response?.body?.items?.item || [];
-			if (!items.length) {
-					throw new Error('API 응답에 날씨 데이터가 없습니다.');
-			}
+    let weatherConditions = new Set(); // 중복 제거를 위해 Set 사용
 
-			let weatherConditions = new Set();
+    items.forEach(item => {
+        if (item.category === 'PTY') { // 강수 형태
+            const ptyMapping = {
+                '0': '맑음',
+                '1': '비',
+                '2': '비/눈',
+                '3': '눈',
+                '5': '이슬비',
+                '6': '빗방울/눈날림',
+                '7': '눈날림',
+            };
+            if (ptyMapping[item.obsrValue]) {
+                weatherConditions.add(ptyMapping[item.obsrValue]);
+            }
+        } else if (item.category === 'SKY') { // 하늘 상태
+            const skyMapping = {
+                '1': '맑음',
+                '3': '구름많음',
+                '4': '흐림',
+            };
+            if (skyMapping[item.obsrValue]) {
+                weatherConditions.add(skyMapping[item.obsrValue]);
+            }
+        } else if (item.category === 'REH' && item.obsrValue >= 80) { // 습함
+            weatherConditions.add('습함');
+        } else if (item.category === 'WSD' && item.obsrValue >= 4) { // 바람
+            weatherConditions.add('바람');
+        }
+    });
 
-			items.forEach(item => {
-					if (item.category === 'PTY') {
-							const ptyMapping = { '0': '맑음', '1': '비', '2': '비/눈', '3': '눈', '5': '이슬비', '6': '빗방울/눈날림', '7': '눈날림' };
-							if (ptyMapping[item.obsrValue]) weatherConditions.add(ptyMapping[item.obsrValue]);
-					} else if (item.category === 'SKY') {
-							const skyMapping = { '1': '맑음', '3': '구름많음', '4': '흐림' };
-							if (skyMapping[item.obsrValue]) weatherConditions.add(skyMapping[item.obsrValue]);
-					} else if (item.category === 'REH' && item.obsrValue >= 80) {
-							weatherConditions.add('습함');
-					} else if (item.category === 'WSD' && item.obsrValue >= 4) {
-							weatherConditions.add('바람');
-					}
-			});
+    const weatherDescription = Array.from(weatherConditions).join(', ');
+    console.log('날씨 출력 결과:', weatherDescription); // 최종 결과 출력
 
-			const weatherDescription = Array.from(weatherConditions).join(', ');
-			console.log('날씨 출력 결과:', weatherDescription);
-
-			return weatherDescription;
-	} catch (error) {
-			console.error('날씨 정보 가져오기 실패:', error.message);
-			throw new Error('날씨 정보를 가져오는 데 실패했습니다.');
-	}
+    return weatherDescription; // 문자열로 된 날씨 조건 반환
+} catch (error) {
+    console.error('날씨 정보 가져오기 실패:', error.message);
+    throw new Error('날씨 정보를 가져오는 데 실패했습니다.');
 }
+}
+
 
 
 
