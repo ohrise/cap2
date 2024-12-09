@@ -36,7 +36,7 @@ function Signup({ onSignup }) {
 	
 			// 서버로 회원가입 요청 보내기
 			try {
-					const response = await fetch('http://localhost:5000/api/signup', {
+					const response = await fetch('http://43.200.27.116:5000/api/signup', {
 							method: 'POST',
 							headers: {
 									'Content-Type': 'application/json',

@@ -88,7 +88,7 @@ function FireInformation() {
 		};
 	
 		try {
-			const response = await fetch('http://localhost:5000/api/fireinformation', {
+			const response = await fetch('http://43.200.27.116:5000/api/fireinformation', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
