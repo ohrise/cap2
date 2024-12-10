@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
-var multer = require('multer');
 var fs = require('fs');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -44,20 +43,6 @@ app.use('/api', FireinformationRouter);
 app.use('/api', PredicResultRouter);
 app.use('/api', ReportRouter);
 app.use('/api', ModifyRouter);
-
-// server.js
-app.use((req, res, next) => {
-  if (req.url.includes('%08')) {
-    console.error('Invalid URL detected:', req.url);
-    return res.status(400).send('Invalid request URL.');
-  }
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log(`Request URL: ${req.url}, Method: ${req.method}`);
-  next();
-});
 
 
 app.listen(5000, () => console.log("Server is running on port 5000"));
