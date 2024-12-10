@@ -104,7 +104,7 @@ async function saveFireInformation(fireInfo) {
     traffic_condition,
     fire_type,
     fire_size,
-    weather: weatherDescription
+    weather: weather
   });
 }
 

@@ -31,10 +31,10 @@ FireinformaionRouter.post('/fireinformation', async (req, res) => {
   try {
     // 날씨 정보 추출
     const weatherDescription = await getWeatherInfo(city, district, fire_date, fire_time);
-    console.log('날씨 정보:', weatherDescription);
+    console.log('날씨 정보:', weather);
 
     // DB에 화재 정보 저장
-    await insertFireInformation({ fire_date, fire_time, city, district, traffic_condition, fire_type, fire_size }, weatherDescription);
+    await insertFireInformation({ fire_date, fire_time, city, district, traffic_condition, fire_type, fire_size }, weather);
     console.log('화재 정보 저장 완료');
 
     // 응답 반환
