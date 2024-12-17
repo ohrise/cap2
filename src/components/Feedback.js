@@ -11,7 +11,7 @@ function FeedbackPage() {
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/feedback');
+        const response = await axios.get('http://43.200.27.116:5000/api/feedback');
         if (response.data.success) {
           setFeedbacks(response.data.feedbacks);
         } else {

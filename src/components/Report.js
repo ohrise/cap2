@@ -21,7 +21,7 @@ function Report() {
         const fetchReports = async () => {
             try {
                 // 서버가 로컬에서 제대로 동작하는지 확인
-                const response = await axios.get('http://localhost:5000/api/report');
+                const response = await axios.get('http://43.200.27.116:5000/api/report');
                 if (response.data.success) {
                     setReports(response.data.posts); // 게시글 데이터 상태 업데이트
                 } else {
