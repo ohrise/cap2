@@ -1,5 +1,5 @@
 const express = require('express');
-const { insertFireInformation } = require('/Users/oseli/Desktop/Capstone2/Code/finalcap2/server/repositories/FireinformationRepositories.js');
+const { insertFireInformation } = require('../repositories/FireinformationRepositories.js');
 
 const FireinformationRouter = express.Router();
 

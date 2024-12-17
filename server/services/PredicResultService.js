@@ -7,7 +7,7 @@ var pool = require('../pgConnect.js'); // PostgreSQL 연결
 // Python 모델 실행 함수
 const runPythonModel = async (inputData) => {
   return new Promise((resolve, reject) => {
-		const pythonProcess = spawn('python3', ['/Users/oseli/Desktop/Capstone2/Code/finalcap2/server/Feedback.py', JSON.stringify(inputData)]);
+		const pythonProcess = spawn('python3', ['../Feedback.py', JSON.stringify(inputData)]);
 
 
 
