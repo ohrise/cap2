@@ -4,22 +4,21 @@ import { useNavigate } from 'react-router-dom'; // 추가
 import './FireInformation.css';
 
 const locations = {
-  "서울특별시": ["종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"],
-  "부산광역시": ["중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"],
-  "대구광역시": ["군위군", "중구", "동구", "서구", "남구", "북구", "수성구", "달서구", "달성군"],
-  "인천광역시": ["미추홀구", "중구", "동구", "연수구", "남동구", "부평구", "계양구", "서구", "강화군", "옹진군"],
-  "광주광역시": ["동구", "서구", "남구", "북구", "광산구"],
-  "대전광역시": ["동구", "중구", "서구", "유성구", "대덕구"],
-  "울산광역시": ["중구", "남구", "동구", "북구", "울주군"],
-  "세종특별자치시": ["세종특별자치시"],
-  "경기도": ["부천시원미구", "부천시소사구", "부천시오정구", "수원시장안구", "수원시권선구", "수원시팔달구", "수원시영통구", "성남시수정구", "성남시중원구", "성남시분당구", "의정부시", "안양시만안구", "안양시동안구", "광명시", "평택시", "동두천시", "안산시상록구", "안산시단원구", "고양시덕양구", "고양시일산동구", "고양시일산서구", "과천시", "구리시", "남양주시", "오산시", "시흥시", "군포시", "의왕시", "하남시", "용인시처인구", "용인시기흥구", "용인시수지구", "파주시", "이천시", "안성시", "김포시", "화성시", "광주시", "양주시", "포천시", "여주시", "연천군", "가평군", "양평군"],
-  "강원특별자치도": ["춘천시", "원주시", "강릉시", "동해시", "태백시", "속초시", "삼척시", "홍천군", "횡성군", "영월군", "평창군", "정선군", "철원군", "화천군", "양구군", "인제군", "고성군", "양양군"],
-  // 기타 지역도 포함
+	"서울특별시": ["종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"],
+	"부산광역시": ["중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"],
+	"대구광역시": ["군위군", "중구", "동구", "서구", "남구", "북구", "수성구", "달서구", "달성군"],
+	"인천광역시": ["미추홀구", "중구", "동구", "연수구", "남동구", "부평구", "계양구", "서구", "강화군", "옹진군"],
+	"광주광역시": ["동구", "서구", "남구", "북구", "광산구"],
+	"대전광역시": ["동구", "중구", "서구", "유성구", "대덕구"],
+	"울산광역시": ["중구", "남구", "동구", "북구", "울주군"],
+	"세종특별자치시": ["세종특별자치시"],
+	"경기도": ["부천시원미구", "부천시소사구", "부천시오정구", "수원시장안구", "수원시권선구", "수원시팔달구", "수원시영통구", "성남시수정구", "성남시중원구", "성남시분당구", "의정부시", "안양시만안구", "안양시동안구", "광명시", "평택시", "동두천시", "안산시상록구", "안산시단원구", "고양시덕양구", "고양시일산동구", "고양시일산서구", "과천시", "구리시", "남양주시", "오산시", "시흥시", "군포시", "의왕시", "하남시", "용인시처인구", "용인시기흥구", "용인시수지구", "파주시", "이천시", "안성시", "김포시", "화성시", "광주시", "양주시", "포천시", "여주시", "연천군", "가평군", "양평군"],
+	"강원특별자치도": ["춘천시", "원주시", "강릉시", "동해시", "태백시", "속초시", "삼척시", "홍천군", "횡성군", "영월군", "평창군", "정선군", "철원군", "화천군", "양구군", "인제군", "고성군", "양양군"],
 };
 
 function FireInformation() {
-	const navigate = useNavigate(); // useNavigate 훅 생성
-	
+  const navigate = useNavigate(); // useNavigate 훅 생성
+
   const [fireData, setFireData] = useState({
     fire_date: '',
     fire_time: '',
@@ -27,14 +26,16 @@ function FireInformation() {
     district: '',
     fire_type: '',
     fire_size: '',
-    traffic_condition: ''
+    traffic_condition: '',
+    weather: '' // 날씨 추가
   });
 
-	const [showPictograms, setShowPictograms] = useState({
+  const [showPictograms, setShowPictograms] = useState({
     map: false,
     traffic_condition: false,
     fire_type: false,
-    fire_size: false
+    fire_size: false,
+    weather: false // 날씨 픽토그램 추가
   });
 
   useEffect(() => {
@@ -46,7 +47,7 @@ function FireInformation() {
     setFireData({
       ...fireData,
       city: selectedLocation,
-      district: ''  // 구/군 선택 초기화
+      district: '' // 구/군 선택 초기화
     });
     setShowPictograms({ ...showPictograms, map: true });
   };
@@ -54,7 +55,7 @@ function FireInformation() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFireData({ ...fireData, [name]: value });
-    console.log(fireData);  // 입력된 값 출력
+    console.log(fireData); // 입력된 값 출력
 
     // 상태별로 픽토그램 표시 설정
     if (name === 'traffic_condition') {
@@ -63,55 +64,52 @@ function FireInformation() {
       setShowPictograms({ ...showPictograms, fire_type: true });
     } else if (name === 'fire_size') {
       setShowPictograms({ ...showPictograms, fire_size: true });
+    } else if (name === 'weather') {
+      setShowPictograms({ ...showPictograms, weather: true });
     }
   };
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		console.log(fireData);  // handleSubmit 함수 내에서 상태 값 확인
-	
-		// 필수 필드 체크
-		const requiredFields = ['fire_date', 'fire_time', 'city', 'district', 'traffic_condition', 'fire_type', 'fire_size'];
-		const missingFields = requiredFields.filter((field) => !fireData[field]);
-	
-		if (missingFields.length > 0) {
-			alert(`다음 필드를 입력해 주세요: ${missingFields.join(', ')}`);
-			return;
-		}
-	
-		// 데이터 변환 로직 제거 (사용자 입력값 그대로 전송)
-		const transformedData = {
-			...fireData,
-			fire_date: fireData.fire_date.replace(/-/g, ''),  // YYYY-MM-DD -> YYYYMMDD 변환
-			fire_time: fireData.fire_time.replace(':', ''), // HH:MM -> HHMM 변환
-			// city, district, traffic_condition, fire_type, fire_size 그대로 사용
-		};
-	
-		try {
-			const response = await fetch('http://43.200.27.116:5000/api/fireinformation', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(transformedData), // 사용자 입력값 그대로 서버로 전송
-			});
-	
-			const responseData = await response.json();
-			console.log('Server response:', responseData);
-	
-			if (response.ok) {
-				alert('데이터가 성공적으로 저장되었습니다!');
-				navigate('/predicresult'); // 성공 시 페이지 이동
-			} else {
-				alert(`저장 실패: ${responseData.message}`);
-			}
-		} catch (error) {
-			alert(`서버 오류: ${error.message}`);
-		}
-	};
-	
-	
-	
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(fireData); // handleSubmit 함수 내에서 상태 값 확인
+
+    const requiredFields = ['fire_date', 'fire_time', 'city', 'district', 'traffic_condition', 'fire_type', 'fire_size', 'weather'];
+    const missingFields = requiredFields.filter((field) => !fireData[field]);
+
+    if (missingFields.length > 0) {
+      alert(`다음 필드를 입력해 주세요: ${missingFields.join(', ')}`);
+      return;
+    }
+
+    const transformedData = {
+      ...fireData,
+      fire_date: fireData.fire_date.replace(/-/g, ''), // YYYY-MM-DD -> YYYYMMDD 변환
+      fire_time: fireData.fire_time.replace(':', ''), // HH:MM -> HHMM 변환
+    };
+
+    try {
+      const response = await fetch('http://localhost:5000/api/fireinformation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(transformedData),
+      });
+
+      const responseData = await response.json();
+      console.log('Server response:', responseData);
+
+      if (response.ok) {
+        alert('데이터가 성공적으로 저장되었습니다!');
+        navigate('/predicresult'); // 성공 시 페이지 이동
+      } else {
+        alert(`저장 실패: ${responseData.message}`);
+      }
+    } catch (error) {
+      alert(`서버 오류: ${error.message}`);
+    }
+  };
+
   return (
     <div className="page-container">
       <Sidebar />
@@ -183,6 +181,18 @@ function FireInformation() {
               </label>
             </div>
 
+            <label>날씨 상황:</label>
+            <select name="weather" value={fireData.weather} onChange={handleChange}>
+              <option value="">날씨 선택</option>
+              <option value="폭우">폭우</option>
+              <option value="비">비</option>
+              <option value="습함">습함</option>
+              <option value="흐림">흐림</option>
+              <option value="눈">눈</option>
+              <option value="맑음">맑음</option>
+              <option value="바람">바람</option>
+            </select>
+
             <button type="submit" className="submit-button">제출하기</button>
           </form>
         </div>
@@ -207,6 +217,11 @@ function FireInformation() {
           {showPictograms.fire_type && (
             <div className="pictogram fire-type-icon">
               <p>화재 유형</p>
+            </div>
+          )}
+          {showPictograms.weather && (
+            <div className="pictogram weather-icon">
+              <p>날씨</p>
             </div>
           )}
         </div>

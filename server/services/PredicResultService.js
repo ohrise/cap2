@@ -1,13 +1,15 @@
 
 // services/FeedbackService.js
 var { spawn } = require('child_process');
-var { getLatestInput, savePredictionResult, FireInformation } = require('../repositories/PredicResultRepositories.js');  // 경로 수정
+var { getLatestInput, predictSave, FireInformation } = require('../repositories/PredicResultRepositories.js');  // 경로 수정
 var pool = require('../pgConnect.js'); // PostgreSQL 연결
 
 // Python 모델 실행 함수
 const runPythonModel = async (inputData) => {
   return new Promise((resolve, reject) => {
-    const pythonProcess = spawn('python3', ['/Users/oseli/Desktop/캡스톤 2/코드/finalcap2/Feedback.py', JSON.stringify(inputData)]);
+		const pythonProcess = spawn('python3', ['/Users/oseli/Desktop/Capstone2/Code/finalcap2/server/Feedback.py', JSON.stringify(inputData)]);
+
+
 
 
     let result = '';
@@ -32,6 +34,7 @@ const runPythonModel = async (inputData) => {
     });
   });
 };
+
 
 // 예측 분석 및 결과 저장 함수
 const predictFireAnalysisAndSave = async () => {
@@ -66,7 +69,7 @@ const predictFireAnalysisAndSave = async () => {
     });
 
     // 예측 결과를 데이터베이스에 저장
-    await savePredictionResult(predictionResult);
+    await predictSave(predictionResult);
 
     return predictionResult; // 결과 반환
   } catch (error) {

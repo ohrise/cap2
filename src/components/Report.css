@@ -1,41 +1,185 @@
-/* src/components/Report.css */
-.report {
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* 섹션 헤더 스타일 */
+.page-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2.5rem; /* 텍스트 크기 증가 */
+	font-weight: bold;
+	color: #ff5722; /* 강렬한 오렌지 색상 */
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 텍스트 그림자 */
+	margin-bottom: 30px;
+	position: relative;
+	padding: 10px 20px;
 }
 
-.report h1 {
-    color: #337ab7;
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
+/* 좌우 아이콘 추가 */
+.page-header::before,
+.page-header::after {
+	content: "🔥"; /* 불꽃 아이콘 */
+	font-size: 2.5rem;
+	color: #ff5722;
+	margin: 0 10px;
+	position: relative;
+	top: 3px; /* 텍스트와 아이콘 정렬 */
 }
 
-.report ul {
-    list-style-type: none;
-    padding: 0;
+/* 강조선 추가 */
+.page-header::after {
+	content: "";
+	display: block;
+	width: 100px;
+	height: 3px;
+	background-color: #ff5722;
+	margin-top: 10px;
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
-.report li {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 6px;
-    background-color: #f5f5f5;
-    transition: background-color 0.3s;
+
+
+.content {
+	flex: 1;
+	padding: 20px;
+	overflow-y: auto; /* 스크롤 가능 */
 }
 
-.report li:hover {
-    background-color: #e9ecef;
+/* 제목 꾸미기 */
+h1 {
+	font-size: 3rem; /* 텍스트 크기 증가 */
+	font-weight: bold;
+	color: #ff5722; /* 강렬한 오렌지 색상 */
+	text-align: center;
+	margin-bottom: 20px;
+	text-transform: uppercase; /* 텍스트 대문자로 변환 */
+	letter-spacing: 2px; /* 글자 간격 추가 */
+	text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 */
+	position: relative;
+	display: inline-block;
 }
 
-.report li strong {
-    color: #337ab7;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 8px;
+/* 제목 좌우에 아이콘 추가 */
+h1::before,
+h1::after {
+	content: "🔥";
+	font-size: 3rem;
+	color: #ff5722;
+	margin: 0 15px;
+	position: relative;
+	top: 5px;
+}
+
+/* 검색 및 정렬 컨트롤 스타일 */
+.controls-container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	padding: 0 20px;
+	gap: 10px;
+}
+
+/* 검색창에 돋보기 아이콘 추가 */
+.search-input::before {
+	content: "🔍"; /* 돋보기 아이콘 */
+	font-size: 1.5rem;
+	margin-right: 10px;
+	color: #999;
+}
+
+.search-input {
+	flex: 2;
+	padding: 15px; /* 크기 증가 */
+	font-size: 1.2rem; /* 글씨 크기 증가 */
+	border: 2px solid #101010; /* 더 진한 테두리 */
+	border-radius: 8px;
+	margin-right: 10px;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+	border-color: #d9534f; /* 포커스 시 강조 색상 */
+	box-shadow: 0 0 6px rgba(217, 83, 79, 0.5); /* 포커스 시 그림자 */
+	outline: none; /* 기본 포커스 제거 */
+}
+
+.sort-select {
+	flex: 1;
+	padding: 15px; /* 크기 증가 */
+	font-size: 1.2rem; /* 글씨 크기 증가 */
+	border: 2px solid #101010; /* 더 진한 테두리 */
+	border-radius: 8px;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sort-select:focus {
+	border-color: #d9534f; /* 포커스 시 강조 색상 */
+	box-shadow: 0 0 6px rgba(217, 83, 79, 0.5); /* 포커스 시 그림자 */
+	outline: none; /* 기본 포커스 제거 */
+}
+
+/* 검색 결과 없음 메시지 */
+.no-results {
+	text-align: center;
+	font-size: 1.5rem;
+	color: #d9534f;
+	margin-top: 50px;
+}
+
+/* 보고서 리스트 */
+.report-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column; /* 한 줄씩 리스트 표시 */
+	gap: 20px; /* 리스트 간격 */
+}
+
+.report-item {
+	padding: 20px;
+	background: #ffffff;
+	border-radius: 12px;
+	border: 1px solid #e0e0e0; /* 테두리 색상 추가 */
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 더 선명한 그림자 */
+	font-size: 1.2rem;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.report-item:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* 호버 시 더 강조 */
+	border-color: #d9534f; /* 호버 시 테두리 강조 */
+}
+
+.report-item strong {
+	font-size: 1.5rem;
+	display: block;
+	margin-bottom: 10px;
+	color: #d9534f;
+}
+
+.report-item p {
+	margin: 5px 0;
+	color: #555;
+}
+
+.report-item .views {
+	font-size: 1rem;
+	font-weight: bold;
+	color: #999;
+	margin-top: 10px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+	.controls-container {
+			flex-direction: column;
+			gap: 10px;
+	}
+
+	.search-input, .sort-select {
+			width: 100%;
+			margin: 0 0 10px 0;
+	}
 }

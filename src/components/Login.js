@@ -9,16 +9,15 @@ function Login({ onLogin }) {
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // 기본 폼 제출 동작 방지
+        e.preventDefault(); 
 
-        // 클라이언트 측 유효성 검사
         if (!username.trim() || !password.trim()) {
             setErrorMessage('아이디와 비밀번호를 입력해주세요.');
             return;
         }
 
         try {
-            const response = await fetch('http://43.200.27.116:5000/api/login', {
+            const response = await fetch('http://localhost:5000/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

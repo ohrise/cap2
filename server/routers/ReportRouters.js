@@ -20,6 +20,21 @@ ReportController.get('/report', async (req, res) => {
   }
 });
 
+ReportController.post('/api/report/:id/view', async (req, res) => {
+	const { id } = req.params;
+	try {
+			const report = await Report.findById(id);
+			if (!report) {
+					return res.status(404).json({ success: false, error: '리포트를 찾을 수 없습니다.' });
+			}
+			report.views = (report.views || 0) + 1;
+			await report.save();
+			res.json({ success: true, updatedViews: report.views });
+	} catch (err) {
+			res.status(500).json({ success: false, error: '조회수 업데이트에 실패했습니다.' });
+	}
+});
+
 
 
 module.exports = ReportController;

@@ -1,262 +1,246 @@
 /* src/components/Dashboard.css */
 /*/Users/sunoo/fire-response-system/src/components/sunny.jpeg*/
 .dashboard-container {
-    font-family: Arial, sans-serif;
-    color: #333;
-    background-color: #f4f6f9; /* 대시보드 배경 색상 추가 */
-    padding: 20px 0;
+	font-family: Arial, sans-serif;
+	color: #333;
+	background-color: #f4f6f9; /* 대시보드 배경 색상 추가 */
+	padding: 20px 0;
 }
 
 /* 네비게이션 바 스타일 */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    margin: 0 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #333;
+	color: white;
+	padding: 1rem 2rem;
+	border-radius: 8px;
+	margin: 0 2rem;
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #ffdd57; /* 로고 색상 추가 */
+	font-size: 1.8rem;
+	font-weight: bold;
+	color: #ffdd57; /* 로고 색상 추가 */
 }
 
 .nav-links a {
-    color: white;
-    margin: 0 1.5rem;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+	color: white;
+	margin: 0 1.5rem;
+	text-decoration: none;
+	font-weight: bold;
+	transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: #ffdd57; /* 호버 시 강조 색상 */
-    text-decoration: underline;
+	color: #ffdd57; /* 호버 시 강조 색상 */
+	text-decoration: underline;
 }
 
 /* 히어로 섹션 스타일 */
 .hero-section {
-	background-image: url('../components/sunny.jpeg');
-    background-size: cover;
-    background-position: center;
-    height: 400px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-    border-radius: 8px;
-    margin: 20px 2rem;
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	background-image: url('./sunny.jpeg'); /* 이미지 URL 대체 */
+	background-size: cover;
+	background-position: center;
+	height: 400px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	text-align: center;
+	border-radius: 8px;
+	margin: 20px 2rem;
+	overflow: hidden;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* 어두운 오버레이 */
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5); /* 어두운 오버레이 */
 }
 
 .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 70%; /* 컨텐츠 중앙 정렬 및 조정 */
+	position: relative;
+	z-index: 1;
+	max-width: 70%; /* 컨텐츠 중앙 정렬 및 조정 */
 }
 
 .hero-content h2 {
-    font-size: 2.8rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+	font-size: 2.8rem;
+	font-weight: bold;
+	margin-bottom: 10px;
 }
 
 .hero-content p {
-    font-size: 1.3rem;
-    margin-top: 0.5rem;
-    line-height: 1.6;
+	font-size: 1.3rem;
+	margin-top: 0.5rem;
+	line-height: 1.6;
 }
 
 .login-button {
-    background-color: #d9534f;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 15px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+	background-color: #d9534f;
+	color: white;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 15px;
+	font-size: 1.2rem;
+	font-weight: bold;
+	transition: background-color 0.3s ease;
 }
 
 .login-button:hover {
-    background-color: #c9302c;
+	background-color: #c9302c;
 }
 
 /* 대시보드 콘텐츠 레이아웃 */
 .dashboard-content {
-    display: flex;
-    justify-content: space-between;
-    padding: 2rem 2rem 0 2rem;
-    gap: 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	padding: 2rem 2rem 0 2rem;
+	gap: 1.5rem;
+	height: calc(100vh - 520px); /* 하단 여백 없도록 */
 }
 
 /* 주요 지표 패널 스타일 */
-.metrics-panel {
-    width: 22%;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+/* 왼쪽 패널 스타일 */
+.left-panel {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 20px; /* 패널 간격 유지 */
 }
 
-.metrics-panel:hover {
-    transform: translateY(-4px); /* 호버 시 살짝 위로 올라가도록 */
+.metrics-panel, .live-reports {
+	background: white;
+	padding: 20px; /* 패널 내부 여백 */
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	height: 250px; /* 적절한 높이로 조정 */
+	overflow: hidden;
 }
 
-.metrics-panel h3 {
-    color: #d9534f;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #d9534f;
-    padding-bottom: 5px;
+/* 실시간 통계와 리포트 섹션 스타일 */
+.metrics-panel h3, .live-reports h3 {
+	color: #d9534f; /* 강조된 타이틀 색상 */
+	font-size: 1.6rem;
+	font-weight: bold;
+	margin-bottom: 10px;
 }
 
-.metrics-panel p {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
-    line-height: 1.5;
+.metrics-panel p, .live-reports p {
+	font-size: 1.2rem;
+	margin-bottom: 5px;
+	line-height: 1.6;
 }
 
-.metrics-panel button {
-    background-color: #337ab7;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 1.5rem;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
+/* 버튼 스타일 */
+.metrics-panel button, .live-reports button {
+	background-color: #d9534f;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: background-color 0.3s ease;
 }
 
-.metrics-panel button:hover {
-    background-color: #286090;
+.metrics-panel button:hover, .live-reports button:hover {
+	background-color: #c9302c;
 }
 
 /* 중앙 패널 스타일 */
-.main-panel {
-    width: 56%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.center-panel {
+	flex: 1.5;
+	display: flex;
+	flex-direction: column; /* 제목과 카드 세로 정렬 */
+	justify-content: flex-start; /* 상단부터 정렬 */
+	align-items: center;
+	padding: 20px;
+	background: white; /* 통일된 배경 */
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	height: 560px;
 }
 
-.map-container {
-    background-color: #eaecef;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease;
+/* QuickActions 스타일 */
+.quick-actions-container {
+	padding: 20px;
+	margin-top: 5px;
+	position: relative; /* 제목과 연동을 위해 상대 위치 */
+	display: flex;
+	flex-direction: column; /* 제목과 카드 세로 정렬 */
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	text-align: center;
 }
 
-.map-container:hover {
-    transform: translateY(-4px);
+.quick-actions-container h3 {
+	color: #d9534f;
+	font-size: 2rem; /* 타이틀 크기 확대 */
+	margin-bottom: 30px;
+	border-bottom: 3px solid #d9534f; /* 강조를 위한 선 두께 */
+	display: inline-block;
+	padding-bottom: 10px;
 }
 
-.map-placeholder {
-    height: 200px;
-    background-color: #aaa;
-    border-radius: 8px;
-    line-height: 200px;
-    color: #333;
-    font-size: 1.3rem;
-    font-weight: bold;
+/* 카드 컨테이너 */
+.quick-actions-wrapper {
+	display: flex;
+	justify-content: center;
+	gap: 20px; /* 카드 간 간격 */
+	flex-wrap: wrap; /* 반응형을 위한 카드 래핑 */
+	width: 100%;
+	max-width: 900px;
 }
 
-.live-reports {
-    background-color: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+/* QuickActions 카드 */
+.action-card {
+	background: linear-gradient(135deg, #ffc107, #ff9800);
+	border-radius: 12px;
+	padding: 15px; /* 내부 여백 최소화 */
+	flex: 1;
+	max-width: 220px; /* 박스 크기 고정 */
+	min-width: 150px; /* 최소 크기 설정 */
+	height: 350px; /* 카드 높이를 늘림 */
+	color: white;
+	text-align: center;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column; /* 아이콘과 텍스트 세로 정렬 */
+	align-items: center;
+	justify-content: center;
 }
 
-.live-reports:hover {
-    transform: translateY(-4px);
+.action-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.live-reports h3 {
-    color: #d9534f;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #d9534f;
-    padding-bottom: 5px;
+.action-card .icon {
+	font-size: 2.5rem; /* 아이콘 크기 */
+	margin-bottom: 10px;
 }
 
-.live-reports p {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
+.action-card h4 {
+	font-size: 1.4rem; /* 제목 크기 */
+	margin-bottom: 8px;
+	font-weight: bold;
 }
 
-/* 빠른 링크 패널 스타일 */
-.quick-links-panel {
-    width: 22%;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.quick-links-panel:hover {
-    transform: translateY(-4px);
-}
-
-.quick-links-panel h3 {
-    color: #d9534f;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #d9534f;
-    padding-bottom: 5px;
-}
-
-.quick-links-panel button {
-    background-color: #5cb85c;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
-}
-
-.quick-links-panel button:hover {
-    background-color: #4cae4c;
-}
-
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    .dashboard-content {
-        flex-direction: column;
-    }
-
-    .metrics-panel, .quick-links-panel, .main-panel {
-        width: 100%;
-        margin-bottom: 1rem;
-    }
+.action-card p {
+	font-size: 1rem; /* 설명 크기 */
+	line-height: 1.4;
 }

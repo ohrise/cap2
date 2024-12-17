@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { SidebarProvider } from './components/SidebarContext';
+import ReportContext from "./components/ReportContext";
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -14,6 +15,7 @@ import Logout from './components/Logout';
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [users, setUsers] = useState([{ username: 'admin', password: 'password' }]);
+		const [allReports, setAllReports] = useState([]);
 
     const handleLogin = (username, password) => {
 			setIsLoggedIn(true); // 로그인 상태를 true로 변경
@@ -65,6 +67,8 @@ function App() {
                 <Route path="/report" element={isLoggedIn ? <Report /> : <Navigate to="/login" />} />
                 <Route path="/feedback" element={isLoggedIn ? <Feedback /> : <Navigate to="/login" />} />
 								<Route path="/logout" element={<Logout onLogout={handleLogout} users={users} />} />
+								<Route path="/report" element={isLoggedIn ? <Report allReports={allReports} /> : <Navigate to="/login" />} />
+//              <Route path="/reports/:id" element={<ReportContext allReports={allReports} setAllReports={setAllReports} />} />
             </Routes>
         </Router>
 				</SidebarProvider>

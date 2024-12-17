@@ -17,8 +17,8 @@ function Sidebar() {
         { path: "/", label: "Dashboard" },
         { path: "/fireinformation", label: "Fire Information" },
         { path: "/predictresult", label: "Predict Result", condition: showPredictResult }, // 조건부 렌더링
-        { path: "/report", label: "Report" },
-        { path: "/feedback", label: "Feedback" },
+        { path: "/report", label: "Report" }
+        // { path: "/feedback", label: "Feedback" },
     ];
 
     return (

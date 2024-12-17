@@ -1,12 +1,12 @@
 var express = require('express');
-var FeedbackService = require('../services/PredicResultService.js'); // 피드백 서비스
+var { predictFireAnalysisAndSave,UserFireInformation } = require('../services/PredicResultService.js'); // 피드백 서비스
 
 const PredicResultController = express.Router();
 
 PredicResultController.get('/predicresult', async (req, res) => {
   try {
-    const prediction = await FeedbackService.predictFireAnalysisAndSave();
-    const fireInformation = await FeedbackService.UserFireInformation();
+    const prediction = await predictFireAnalysisAndSave();
+    const fireInformation = await UserFireInformation();
 
 		console.log('Prediction:', prediction);
    console.log('Fire Information:', fireInformation);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import QuickActions from './QuickActions';
+import NoticePanel from './NoticePannel';
 import './Dashboard.css';
 
 function Dashboard({ isLoggedIn }) {
@@ -56,11 +57,10 @@ function Dashboard({ isLoggedIn }) {
                     
                 </section>
 
-                {/* 오른쪽 패널: 인터랙티브 지도 */}
+                {/* 오른쪽 패널: NoticePanel */}
                 <aside className="right-panel">
-                    <div className="map-container">
-                        <h3>인터랙티브 지도</h3>
-                        <div className="map-placeholder">[지도]</div>
+                    <div className="notice-container">
+                        <NoticePanel />
                     </div>
                 </aside>
             </div>
