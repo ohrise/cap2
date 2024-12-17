@@ -15,14 +15,14 @@ FireinformationRouter.post('/fireinformation', async (req, res) => {
     weather 
   } = req.body;
 
-  // 필수 필드 검증
+
   if (!fire_date || !fire_time || !city || !district || !traffic_condition || !fire_type || !fire_size || !weather) {
     return res.status(400).json({ message: '모든 필드를 입력하세요.' });
   }
 
-  // 날짜와 시간 검증
-  const dateRegex = /^\d{8}$/; // YYYYMMDD
-  const timeRegex = /^\d{4}$/; // HHMM
+
+  const dateRegex = /^\d{8}$/; 
+  const timeRegex = /^\d{4}$/;
   if (!dateRegex.test(fire_date) || !timeRegex.test(fire_time)) {
     return res.status(400).json({ message: '날짜 또는 시간이 올바른 형식이 아닙니다.' });
   }

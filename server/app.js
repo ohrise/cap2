@@ -6,7 +6,7 @@ var fs = require('fs');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var cors = require("cors");
-var pool = require('./pgConnect.js'); // PostgreSQL 연결
+var pool = require('./pgConnect.js');
 
 
 var app = express();
@@ -14,11 +14,12 @@ var app = express();
 // 미들웨어 설정
 app.use(bodyParser.json());
 app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
 }));
-app.use(bodyParser.urlencoded({ extended: true }));
+
+
 app.use(cookieParser());
 
 var loginRouter = require('./routers/LoginRouters.js');

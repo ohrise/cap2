@@ -11,7 +11,7 @@ PredicResultController.get('/predicresult', async (req, res) => {
 		console.log('Prediction:', prediction);
    console.log('Fire Information:', fireInformation);
  
-    // data1로 감싸지 않고 데이터를 바로 반환
+
     res.status(200).json({ 
       success: true, 
       prediction: prediction, 

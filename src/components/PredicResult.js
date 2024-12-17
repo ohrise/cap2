@@ -17,7 +17,7 @@ const PredictResult = () => {
   useEffect(() => {
     const fetchPredictionResult = async () => {
       try {
-        const response = await axios.get('http://43.200.27.116:5000/api/predicresult');
+        const response = await axios.get('http://localhost:5000/api/predicresult');
         if (response.data.success) {
           setPredictionResult(response.data.prediction);
           setUserInput(response.data.fireInformation);

@@ -1,13 +1,14 @@
 
 // services/FeedbackService.js
 var { spawn } = require('child_process');
-var { getLatestInput, predictSave, FireInformation } = require('../repositories/PredicResultRepositories.js');  // 경로 수정
-var pool = require('../pgConnect.js'); // PostgreSQL 연결
+var { getLatestInput, predictSave, FireInformation } = require('../repositories/PredicResultRepositories.js');
+// var { getLatestInput, predictSave, FireInformation } = require('/Users/oseli/Desktop/Capstone2/Code/finalcap2/server/repositories/PredicResultRepositories.js');
+var pool = require('../pgConnect.js'); 
 
-// Python 모델 실행 함수
+
 const runPythonModel = async (inputData) => {
   return new Promise((resolve, reject) => {
-		const pythonProcess = spawn('python3', ['../Feedback.py', JSON.stringify(inputData)]);
+		const pythonProcess = spawn('python3', ['Feedback.py', JSON.stringify(inputData)]);
 
 
 
@@ -55,23 +56,23 @@ const predictFireAnalysisAndSave = async () => {
     // 정수형 데이터로 변환
     const transformedData = {
       weather: WeatherMapping[latestData.weather] ?? -1,
-      traffic_condition: trafficMapping[latestData.traffic_condition] ?? -1, // 변환 실패 시 기본값 -1
-      fire_size: fireSizeMapping[latestData.fire_size] ?? -1, // 변환 실패 시 기본값 -1
-      fire_type: fireTypeMapping[latestData.fire_type] ?? -1, // 변환 실패 시 기본값 -1
+      traffic_condition: trafficMapping[latestData.traffic_condition] ?? -1, 
+      fire_size: fireSizeMapping[latestData.fire_size] ?? -1,
+      fire_type: fireTypeMapping[latestData.fire_type] ?? -1, 
     };
 
     // Python 모델 실행에 매핑된 정수형 데이터 전달
     const predictionResult = await runPythonModel({
-      weather: transformedData.weather, // 변환된 weather 값 사용
-      traffic_condition: transformedData.traffic_condition, // 변환된 traffic_condition 값 사용
-      fire_size: transformedData.fire_size, // 변환된 fire_size 값 사용
-      fire_type: transformedData.fire_type, // 변환된 fire_type 값 사용
+      weather: transformedData.weather, 
+      traffic_condition: transformedData.traffic_condition, 
+      fire_size: transformedData.fire_size, 
+      fire_type: transformedData.fire_type, 
     });
 
     // 예측 결과를 데이터베이스에 저장
     await predictSave(predictionResult);
 
-    return predictionResult; // 결과 반환
+    return predictionResult; 
   } catch (error) {
     console.error('Error in predictFireAnalysisAndSave:', error);
     throw error;
@@ -81,7 +82,7 @@ const predictFireAnalysisAndSave = async () => {
 
 const UserFireInformation = async () => {
   try {
-    // 최신 입력 데이터를 fire_incident 테이블에서 조회 (가장 최근 데이터 1개)
+   
     const latestData = await FireInformation();
 
     return latestData ? latestData : null; // 최신 데이터 반환, 없으면 null 반환

@@ -1,8 +1,7 @@
 //DB와 server의 소통 
 //PredicResult
 // DB와 서버의 소통 - PredicResult Repository
-const pool = require('../pgConnect.js'); // PostgreSQL 연결
-
+const pool = require('../pgConnect.js'); 
 const FireInformation = async () => {
   const query = `
     SELECT *
@@ -15,14 +14,14 @@ const FireInformation = async () => {
 
     if (result.rows.length === 0) {
       console.error('No data found in the database.');
-      return null; // 데이터가 없을 경우 null 반환
+      return null; 
     }
 
-    console.log('Latest fire incident data:', result.rows[0]); // 로그 추가
+    console.log('Latest fire incident data:', result.rows[0]); 
     return result.rows[0];
   } catch (error) {
     console.error('Database query error:', error.message);
-    throw error; // 에러를 호출자에게 전달
+    throw error; 
   }
 };
 
@@ -44,10 +43,10 @@ const getLatestInput = async () => {
       throw new Error('No data found in the database.');
     }
 
-    return result.rows[0]; // 최신 데이터 반환
+    return result.rows[0]; 
   } catch (error) {
     console.error('Database query error:', error.message);
-    throw error; // 에러를 호출자에게 전달
+    throw error; 
   }
 };
 
@@ -85,7 +84,7 @@ const insertModify = async (data) => {
     data.water,
     data.ladder,
     data.pumper,
-    data.input || null, // input이 null이어도 허용
+    data.input || null, 
   ];
 
   try {
@@ -103,22 +102,21 @@ const insertModify = async (data) => {
 const predictSave = async (predictionResult) => {
   const client = await pool.connect();
   try {
-    await client.query('BEGIN');  // 트랜잭션 시작
+    await client.query('BEGIN');  
+    
+    await savePredictionResult(predictionResult, client);  
+    await insertModify(predictionResult, client);         
 
-    // 두 테이블에 예측 결과 저장
-    await savePredictionResult(predictionResult, client);  // history 테이블에 저장
-    await insertModify(predictionResult, client);          // modify 테이블에 저장
-
-    await client.query('COMMIT'); // 트랜잭션 커밋
+    await client.query('COMMIT');
 
     console.log('Prediction result saved to both tables.');
-    return predictionResult;  // 예측 결과 반환
+    return predictionResult; 
   } catch (error) {
-    await client.query('ROLLBACK'); // 오류가 발생하면 롤백
+    await client.query('ROLLBACK'); 
     console.error('Error in saving prediction result:', error);
-    throw error;  // 에러를 호출자에게 전달
+    throw error;  
   } finally {
-    client.release(); // 클라이언트 연결 해제
+    client.release(); 
   }
 };
 

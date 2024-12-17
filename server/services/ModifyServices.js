@@ -5,13 +5,13 @@ const getFireInformationAndPrediction = async (postId) => {
   try {
     const fireResult = await ModifyRepositories.getFireInformation(postId);
     const predictionResult = await ModifyRepositories.getPrediction(postId);
-    const modifyResult = await ModifyRepositories.getModify(postId); // modify 데이터 추가
+    const modifyResult = await ModifyRepositories.getModify(postId); 
 
     if (!fireResult) throw new Error("fire_incident 데이터가 존재하지 않습니다.");
     if (!predictionResult) throw new Error("history 데이터가 존재하지 않습니다.");
 		if (!modifyResult) throw new Error("history 데이터가 존재하지 않습니다.");
 		
-    return { fireResult, predictionResult, modifyResult }; // modifyResult도 반환
+    return { fireResult, predictionResult, modifyResult }; 
   } catch (error) {
     console.error(`Error in ModifyServices for postId ${postId}:`, error.message);
     throw error;
@@ -22,15 +22,23 @@ const getFireInformationAndPrediction = async (postId) => {
 
 
 // Modify 데이터 수정
-const updateModify = async (postId, firefighter, ambulance, water, ladder, pumper, input) => {
+const updateModify = async (id, firefighter, ambulance, water, ladder, pumper, input) => {
   try {
-    const updatedData = await ModifyRepositories.updateModify(postId, firefighter, ambulance, water, ladder, pumper, input);
+    console.log("Service - Data to update:", { id, firefighter, ambulance, water, ladder, pumper, input });
+
+    // 정확한 순서로 값 전달
+    const updatedData = await ModifyRepositories.updateModify(
+      id, firefighter, ambulance, water, ladder, pumper, input
+    );
+
     return updatedData;
   } catch (error) {
-    console.error(`Error updating data in modify service for report_id ${postId}:`, error.message);
+    console.error(`Error updating data in modify service for report_id ${id}:`, error.message);
     throw error;
   }
 };
+
+
 
 module.exports = {
   getFireInformationAndPrediction,

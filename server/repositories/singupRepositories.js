@@ -1,12 +1,12 @@
 //DB와 server의 소통 
 //signup
 
-var pool = require('../pgConnect.js'); // PostgreSQL 연결
+var pool = require('../pgConnect.js'); 
 var bcrypt = require('bcrypt')
 
 const SignupRepository = {
     /**
-     * 새로운 사용자를 데이터베이스에 삽입합니다.
+    
      * @param {Object} user - 사용자 정보 객체.
      * @returns {Promise<void>}
      */
@@ -26,7 +26,7 @@ const SignupRepository = {
     },
 
     /**
-     * 특정 사용자 ID가 이미 존재하는지 확인합니다.
+    
      * @param {string} user_id - 중복 확인할 사용자 ID.
      * @returns {Promise<boolean>} - 존재하면 true, 아니면 false.
      */

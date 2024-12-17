@@ -11,7 +11,7 @@ const getFireInformation = async (postId) => {
 
   try {
     const fireResult = await pool.query(fireQuery, [postId]);
-    return fireResult.rows[0]; // fire_incident 테이블의 첫 번째 행 반환
+    return fireResult.rows[0];
   } catch (error) {
     console.error(`Error fetching fire information for id ${postId}:`, error.message);
     throw error;
@@ -27,7 +27,7 @@ const getPrediction = async (postId) => {
 
   try {
     const predictionResult = await pool.query(predictionQuery, [postId]);
-    return predictionResult.rows[0]; // history 테이블의 첫 번째 행 반환
+    return predictionResult.rows[0]; 
   } catch (error) {
     console.error(`Error fetching prediction for id ${postId}:`, error.message);
     throw error;
@@ -43,7 +43,7 @@ const getModify = async (postId) => {
 
   try {
     const modifyResult = await pool.query(modifyQuery, [postId]);
-    return modifyResult.rows[0] || null; // modify 데이터가 없으면 null 반환
+    return modifyResult.rows[0] || null; 
   } catch (error) {
     console.error(`Error fetching modify information for postId ${postId}:`, error.message);
     throw error;
@@ -53,25 +53,9 @@ const getModify = async (postId) => {
 
 
 // Modify 데이터 삽입
-const insertModify = async (firefighter, ambulance, water, ladder, pumper, input) => {
-  const query = `
-    INSERT INTO modify (firefighter, ambulance, water, ladder, pumper, input)
-    VALUES ($1, $2, $3, $4, $5, $6)
-    RETURNING *;
-  `;
-  const values = [firefighter, ambulance, water, ladder, pumper, input];
+const updateModify = async (id, firefighter, ambulance, water, ladder, pumper, input) => {
+  console.log("Repository - Updating values:", { id, firefighter, ambulance, water, ladder, pumper, input });
 
-  try {
-    const result = await pool.query(query, values);
-    return result.rows[0];
-  } catch (error) {
-    console.error('Error inserting data into modify table:', error.message);
-    throw error;
-  }
-};
-
-// Modify 데이터 수정
-const updateModify = async (firefighter, ambulance, water, ladder, pumper, input) => {
   const query = `
     UPDATE modify
     SET firefighter = $1,
@@ -83,21 +67,31 @@ const updateModify = async (firefighter, ambulance, water, ladder, pumper, input
     WHERE id = $7
     RETURNING *;
   `;
-  const values = [firefighter, ambulance, water, ladder, pumper, input, postId];
+
+  const values = [
+    firefighter,
+    ambulance,
+    water,
+    ladder,
+    pumper,
+    input || "", 
+    id,
+  ];
 
   try {
     const result = await pool.query(query, values);
     return result.rows[0];
   } catch (error) {
-    console.error(`Error updating data in modify table for report_id ${postId}:`, error.message);
+    console.error(`Error updating modify table for id ${id}:`, error.message);
     throw error;
   }
 };
+
+
 
 module.exports = {
   getFireInformation,
 	getModify,
 	getPrediction,
-  insertModify,
   updateModify,
 };

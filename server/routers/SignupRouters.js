@@ -1,12 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const pool = require('../pgConnect.js'); // PostgreSQL 연결
-const SignupService = require('../services/SignupService.js'); // 회원가입 로직 분리
+const pool = require('../pgConnect.js'); 
+const SignupService = require('../services/SignupService.js'); 
 
 
-const Singuprouter = express.Router(); // Express 라우터 초기화
+const Singuprouter = express.Router(); 
 
-// 회원가입 엔드포인트
 Singuprouter.post('/signup', async (req, res) => {
     const { 
         user_id, 
